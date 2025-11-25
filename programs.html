@@ -1105,19 +1105,125 @@ void main() {
         for (i = 0; i < m; i++)
             printf("\t%d", available[i]);
         printf("\n");
-    }
-
-    printf("The Processes Deadlocked are ");
-    for (i = 0; i < n; i++) {
+      }
+      
+      printf("The Processes Deadlocked are ");
+      for (i = 0; i < n; i++) {
         if (finish[i] == 0)
-            printf("P[%d]", i);
+        printf("P[%d]", i);
+      }
     }
-}
-</pre> 
-      <h1>**********************************</h1>
-<pre>
+  </pre> 
+  <h1>**********************************</h1>
+  <pre>
+    
+  <pre>
+  // Shell - Conditional Programs
+
+  // Person is eligible to vote or not 
+  read -p "Enter you age: " age
+  if ((age >= 18))
+    then
+    echo "You are eligible to vote"
+  else
+    echo "You are not eligible to vote"
+  fi
+
+
+  //check a number is even or odd
+  read -p "Enter a number: " num
+  if ((num % 2 == 0))
+    then
+    echo "Number is even"
+  else
+    echo "Number is odd"
+  fi
+
+
+  // find grade of a student
+  read -p "enter your marks:" marks
+  if ((marks >= 90))
+    then
+    echo "Grade A"
+  elif ((marks >= 80))
+    then
+    echo "Grade B"
+  elif ((marks >= 70))
+    then
+    echo "Grade C"
+  elif ((marks >= 60))
+    then
+    echo "Grade D"
+  else
+    echo "Grade F"
+  fi
+
+  // simple calculator
+  read -p "Enter two numbers" num1 num2
+  echo "Choose Operation"
+  read -p "1.Add 2.Sub 3.Mul 4.Div 5.Mod" choice
+  case $choice in
+    1)
+      echo "Result: $((num1 + num2))";;
+    2)
+      echo "Result: $((num1 - num2))";;
+    3)
+      echo "Result: $((num1 * num2))";;
+    4)
+      echo "Result: $((num1 / num2))";;
+    5)
+      echo "Result: $((num1 % num2))";;
+    *)
+      echo "Invalid operator";;
+  esac
+
+
+  // Shell - Iterative Programs
+
+  // Factorial of a number - for
+  echo -n "Enter a number: "
+  read number
+  for((i = 1; i <= number; i++))
+  do
+    factorial = $((factorial * i))
+  done
+  echo "Factorial of $number is $factorial"
   
-    </pre>
+  // Factorial of a number - while
+  echo -n "Enter a number: "
+  read num
+  
+  fact = 1
+
+  while [ $num -gt 1 ]
+  do
+    fact = fact * num
+    num = num - 1
+  done
+
+  echo "fact of $num is $fact"
+
+
+
+  // calculator - until
+  read -p "Enter two numbers" num1 num2
+  until((next == 1))
+  do
+  echo "Choose Operation"
+  read -p "1.Add 2.Sub 3.Mul 4.Div 5.Mod: " choice
+    case $choice in
+      1) echo "Result: $((num1 + num2))";;
+      2) echo "Result: $((num1 - num2))";;
+      3) echo "Result: $((num1 * num2))";;
+      4) echo "Result: $((num1 / num2))";;
+      5) echo "Result: $((num1 % num2))";;
+      *) echo "Invalid operator";;
+    esac
+    read -p "Do you want to continue? (Yes: 0/ No: 1): " next
+  done
+</pre>
+
+</pre>
 </body>
 
 </html>
