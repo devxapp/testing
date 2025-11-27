@@ -1,0 +1,1215 @@
+ADDITION OF POLYNOMIAL                                                                                                                                        #include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int coeff,exp;
+    struct node *next;
+};
+struct node *start1=NULL,*start2=NULL,*start3=NULL;
+struct node* add(struct node *start1,struct node *start2);
+void display(struct node *start3);
+struct node *create()
+{
+    struct node *newnode,*start=NULL,*temp=NULL;
+    int n;
+    do
+    {
+        newnode=(struct node*) malloc (sizeof(struct node));
+        printf("Enter coeff of polynomial:");
+        scanf("%d",&newnode->coeff);
+        printf("Enter exp of polynomial:");
+        scanf("%d",&newnode->exp);
+        newnode->next=NULL;
+        if(start==NULL)
+        {
+            start=newnode;
+            temp=start;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Want another node(1/0):");
+        scanf("%d",&n);
+    }while(n);
+    return start;
+}
+void display(struct node *start3)
+{
+    struct node *temp=start3;
+    if(start3==NULL)
+    {
+        printf("No polynomial entered!\n");
+    }
+    else
+    {
+        while(temp!=NULL)
+        {
+            printf("%dx^%d",temp->coeff,temp->exp);
+            temp=temp->next;
+            if(temp!=NULL)
+            {
+                printf("+");
+            }
+        }
+    }
+}
+void main()
+{
+    printf("Enter polynomial-1:\n");
+    start1=create();
+    printf("Enter polynomial-2:\n");
+    start2=create();
+    printf("Addition of two polynomials: ");
+    start3=add(start1,start2);
+    display(start3);
+}
+struct node* add(struct node *start1,struct node *start2)
+{
+    struct node *temp,*newnode;
+    while(start1!=NULL && start2!=NULL)
+    {
+        newnode=(struct node*) malloc (sizeof(struct node));
+        newnode->next=NULL;
+        if(start1->exp==start2->exp)
+        {
+            newnode->coeff=start1->coeff+start2->coeff;
+            newnode->exp=start1->exp;
+            start1=start1->next;
+            start2=start2->next;
+        }
+        else if(start1->exp>start2->exp)
+        {
+            newnode->coeff=start1->coeff;
+            newnode->exp=start1->exp;
+            start1=start1->next;
+        }
+        else 
+        {
+            newnode->coeff=start2->coeff;
+            newnode->exp=start2->exp;
+            start2=start2->next;
+        }
+        if(start3==NULL)
+        {
+            start3=newnode;
+            temp=start3;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    while(start1!=NULL)
+    {
+        newnode=(struct node*) malloc (sizeof(struct node));
+        newnode->next=NULL;
+        newnode->coeff=start1->coeff;
+        newnode->exp=start1->exp;
+        if(start3==NULL)
+        {
+            start3=newnode;
+            temp=start3;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        start1=start1->next;
+    }
+    while(start2!=NULL)
+    {
+        newnode=(struct node*) malloc (sizeof(struct node));
+        newnode->next=NULL;
+        newnode->coeff=start2->coeff;
+        newnode->exp=start2->exp;
+        if(start3==NULL)
+        {
+            start3=newnode;
+            temp=start3;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        start2=start2->next;
+    }
+    return start3;
+}
+
+MULTIPLICATION OF POLYNOMIAL                                                                                 
+
+ #include<Stdio.h>
+#include<stdlib.h>
+struct node 
+{
+int coeff,exp;
+struct node *next;
+};
+struct node *start1=NULL,*start2=NULL;
+void display(struct node *start3);
+struct node* multiply(struct node *start1,struct node *start2);
+struct node *create()
+{
+    struct node *newnode,*temp,*start=NULL;
+    int n;
+    do
+    {
+        newnode=(struct node*) malloc (sizeof(struct node));
+        printf("Enter coeff:");
+        scanf("%d",&newnode->coeff);
+        printf("Enter exp:");
+        scanf("%d",&newnode->exp);
+        newnode->next=NULL;
+        if(start==NULL)
+        {
+            start=newnode;
+            temp=start;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Want another node:");
+        scanf("%d",&n);
+    }while(n);
+    return start;
+}
+void display(struct node *start3)
+{
+    struct node *temp=start3;
+    while(temp!=NULL)
+    {
+        printf("%dx^%d",temp->coeff,temp->exp);
+        temp=temp->next;
+        if(temp!=NULL)
+            printf("+");
+    }
+    printf("\n");
+}
+struct node* multiply(struct node *start1,struct node *start2)
+{
+    struct node *temp,*temp1=start1,*temp2=start2;
+    temp=(struct node*) malloc (sizeof(struct node));
+    temp->next=NULL;
+    struct node *start3=temp;
+    while(temp1!=NULL)
+    {
+        while(temp2!=NULL)
+        {
+            temp->coeff=temp1->coeff*temp2->coeff;
+            temp->exp=temp1->exp+temp2->exp;
+            temp2=temp2->next;
+            if(temp2!=NULL)
+            {
+                temp->next=(struct node*) malloc (sizeof(struct node));
+                temp=temp->next;
+            }
+        }
+        temp1=temp1->next;
+        temp2=start2;
+        if(temp1!=NULL)
+        {
+            temp->next=(struct node*) malloc (sizeof(struct node));
+            temp=temp->next;
+        }
+    }
+    temp->next=NULL;
+    return start3;
+}
+void main()
+{
+    struct node *start3=NULL;
+    printf("For polynomial-1:");
+    start1=create();
+    printf("For polynomial-2:");
+    start2=create();
+    printf("Multiplication result:");
+    start3=multiply(start1,start2);
+    display(start3);
+}
+
+CIRCULAR LINKED LIST
+
+                                                                                                                                                                              #include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL,*last=NULL;
+void insert_at_beg();
+void insert_at_pos();
+void insert_at_end();
+void delete_at_beg();
+void delete_at_pos();
+void delete_at_end();
+void display();
+void createlist();
+struct node *createnode()
+{
+    struct node *newnode;
+    newnode=(struct node *)malloc(sizeof(struct node));
+    //newnode->next=NULL;
+    printf("Enter data:");
+    scanf("%d",&newnode->data);
+    newnode->next=NULL;
+    return newnode;
+}
+void createlist()
+{
+    struct node *newnode;
+    int n;
+    do
+    {
+        newnode=createnode();
+        if(start==NULL)
+        {
+            start=last=newnode;
+            newnode->next=start;
+        }
+        else
+        {
+            last->next=newnode;
+            newnode->next=start;
+            last=newnode;
+        }
+        printf("Want another node:");
+        scanf("%d",&n);
+    } while (n);
+}
+void insert_at_beg()
+{
+    struct node *newnode;
+    newnode=createnode();
+    if(start==NULL)
+    {
+        start=last=newnode;
+        start->next=start;
+    }
+    else
+    {
+        newnode->next=start;
+        start=newnode;
+        last->next=start;
+    }
+}
+void insert_at_end()
+{
+    struct node *newnode;
+    newnode=createnode();
+    if(start==NULL)
+    {
+        start=last=newnode;
+        newnode->next=start;
+    }
+    else
+    {
+        last->next=newnode;
+        last=newnode;
+        last->next=start;
+    }
+}
+void insert_at_pos()
+{
+    struct node *newnode,*temp=start;
+    newnode=createnode();
+    int pos;
+    printf("Enter position:");
+    scanf("%d",&pos);
+    if(start==NULL)
+    {
+        start=last=newnode;
+        newnode->next=start;
+    }
+    else
+    {
+        if(pos<1)
+        {
+            printf("Invalid!");
+            return ;
+        }
+        else if(pos==1)
+        {
+            newnode->next=start;
+            start=newnode;
+            last->next=start;    
+        }
+        else
+        {
+            for(int i=1;i<pos-1 && temp->next!=start;i++)
+            {
+                temp=temp->next;
+            }
+            newnode->next=temp->next;
+            temp->next=newnode;
+        }
+    }
+}
+void delete_at_beg()
+{
+    struct node *temp=start;
+    if(start==NULL)
+    {
+        printf("No elements in the list");
+    }
+    // else if(start->next==start)
+    // {
+    //     free(temp);
+    //     start=last=NULL;
+    // }
+    else
+    {
+        start=start->next;
+        free(temp);
+        last->next=start;
+    }
+}
+void  delete_at_end()
+{
+    struct node *temp=start,*prev=NULL;
+    if(start==NULL)
+    {
+        printf("No elements in the list");
+    }
+    else if(start->next==start)
+    {
+        start=last=NULL;
+    }
+    else
+    {
+        while(temp->next!=start)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        last=prev;
+        last->next=start;
+        free(temp);
+    }
+}
+void delete_at_pos()
+{
+    struct node *temp=start,*prev;
+    int pos,count=0;
+    if(start==NULL)
+    {
+        printf("No elements in the lsit!");
+    }
+    else
+    {
+        printf("Enter position:");
+        scanf("%d",&pos);
+        if(pos<1)
+        {
+            printf("Invalid!");
+        }
+        else if(pos==1)
+        {
+            start=start->next;
+            free(temp);
+        }
+        else if(start->next==start)
+        {
+            start=last=NULL;
+        }
+        else
+        {
+            while(temp!=NULL && count<pos-1)
+            {
+                prev=temp;
+                temp=temp->next;
+                count++;
+            }
+            prev->next=temp->next;
+            free(temp);
+        }
+    }
+}
+void display()
+{
+    if(start==NULL)
+    {
+        printf("No elements in the list!\n");
+    }
+    else
+    {
+        struct node *temp=start;
+        printf("Circular Linked List:\n");
+        do
+        {
+            printf("%d->",temp->data);
+            temp=temp->next;
+        }while(temp!=start);
+    }
+}
+int main()
+{
+int choice;
+    do
+    {
+    printf("---Circular linked list---\n");
+    printf("1.create\n2.insert_at_beg\n3.insert_at_pos\n4. insert at end\n5.delete at beg\n6.delete at pos\n7.delete at end\n8.display\n9.exit\n");
+    printf("enter choice");
+    scanf("%d",&choice);
+    switch (choice)
+    {
+    case 1:
+    createlist();
+        break;
+    case 2:
+    insert_at_beg();
+    break;
+    case 3:
+    insert_at_pos();
+    break;
+    case 4:
+    insert_at_end();
+    break;
+    case 5:
+    delete_at_beg();
+    break;
+    case 6:
+    delete_at_pos();
+    break;
+    case 7:
+    delete_at_end();
+    break;
+    case 8:
+    display();
+    break;
+    case 9:
+    exit(0);
+    default:
+    printf("Invalid");
+        break;
+    }
+}while(1);
+return 0;
+}
+
+PRIORITY QUEUE
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data,priority;
+    struct node* next;
+};
+struct node *start=NULL;
+void insert();
+void delete();
+void display();
+void main()
+{
+    int opr;
+    do
+    {
+        printf("---Priority Queue(SLL)---\n");
+        printf("1.Insertion\n2.delete\n3.display\n4.exit\n");
+        printf("Enter operation:");
+        scanf("%d",&opr);
+        switch(opr)
+        {
+            case 1:insert();  break;
+            case 2:delete();  break;
+            case 3:display();  break;
+            case 4:exit(0);
+            default:printf("Invalid!");
+            break;
+        }
+    } while (1);
+}
+struct node *create()
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&newnode->data);
+    printf("Enter priority:");
+    scanf("%d",&newnode->priority);
+    newnode->next=NULL;
+    return newnode;
+}
+void insert()
+{
+    struct node *newnode,*temp=start;
+    newnode=create();
+    if(start==NULL || newnode->priority<start->priority)
+    {
+        newnode->next=start;
+        start=newnode;
+    }
+    else
+    {
+        while(temp->next!=NULL && newnode->priority>temp->next->priority)
+        {
+            temp=temp->next;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+void delete()
+{
+    struct node *temp=start;
+    if(temp==NULL)
+    {
+        printf("Empty!");
+    }
+    else
+    {
+        start=start->next;
+        free(temp);
+    }
+}
+void display()
+{
+    struct node* temp=start;
+    if(temp==NULL)
+    {
+        printf("Empty!");
+    }
+    else
+    {
+        while(temp!=NULL)
+        {
+            printf("%d|%d->",temp->data,temp->priority);
+            temp=temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+BINARY SEARCH TREE
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+// struct node *root = NULL;
+struct node *inorder(struct node *root);
+struct node *insert(struct node *root, int data1);
+struct node *delete(struct node *root, int data1);
+void display(struct node *root);
+void search(struct node *root, int data1);
+void main()
+{
+    struct node *root = NULL;
+    int opr, data1;
+    do
+    {
+        printf("Binary search tree operations\n");
+        printf("1.Insert\n2.Delete\n3.display\n4.Search\n5.Exit\n");
+        printf("Enter your choice:");
+        scanf("%d", &opr);
+        switch (opr)
+        {
+        case 1:
+            printf("Enter data1:");
+            scanf("%d", &data1);
+            root = insert(root, data1);
+            break;
+        case 2:
+            printf("Enter data1:");
+            scanf("%d", &data1);
+            root = delete(root, data1);
+            break;
+        case 3:
+            display(root);
+            break;
+        case 4:
+            printf("Enter data1:");
+            scanf("%d", &data1);
+            search(root, data1);
+            break;
+        case 5:
+            exit(0);
+        default:
+            printf("Invalid choice");
+            break;
+        }
+    } while (1);
+}
+struct node *insert(struct node *root, int data1)
+{
+    if (root == NULL)
+    {
+        root = (struct node *)malloc(sizeof(struct node));
+        root->data = data1;
+        root->left = NULL;
+        root->right = NULL;
+    }
+    else if (root->data > data1)
+    {
+        root->left = insert(root->left, data1);
+    }
+    else
+    {
+        root->right = insert(root->right, data1);
+    }
+    return root;
+}
+struct node *delete(struct node *root, int data1)
+{
+    struct node *temp;
+    if (root == NULL)
+    {
+        printf("Tree is empty\n");
+    }
+    else if (root->data > data1)
+    {
+        root->left = delete(root->left, data1);
+    }
+    else if (root->data < data1)
+    {
+        root->right = delete(root->right, data1);
+    }
+    else
+    {
+        if (root->left == NULL && root->right == NULL)
+        {
+            free(root);
+            return NULL;
+        }
+        else if (root->left == NULL)
+        {
+            temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if (root->right == NULL)
+        {
+            temp = root->left;
+            free(root);
+            return temp;
+        }
+        else
+        {
+            temp = inorder(root->right);
+            root->data = temp->data;
+            root->right = delete(root->right, temp->data);
+        }
+    }
+    return root;
+}
+void display(struct node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        display(root->left);
+        printf("%d->", root->data);
+        display(root->right);
+    }
+    printf("\n");
+}
+struct node *inorder(struct node *root)
+{
+    if (root->left != NULL)
+    {
+        return inorder(root->left);
+    }
+    else
+    {
+        return root;
+    }
+}
+void search(struct node *root, int data1)
+{
+    if (root == NULL)
+    {
+        printf("Tree is empty\n");
+        return;
+    }
+    else
+    {
+        if (root->data == data1)
+        {
+            printf("Element found\n");
+            return;
+        }
+        else if (root->data > data1)
+        {
+            return search(root->left, data1);
+        }
+        else
+        {
+            return search(root->right, data1);
+        }
+    }
+}
+
+DEQUEUE
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node *next;
+};
+struct node *front = NULL, *rear = NULL;
+struct node* createnode() {
+    struct node *newnode;
+    newnode = (struct node*)malloc(sizeof(struct node));
+    printf("Enter data: ");
+    scanf("%d", &newnode->data);
+    newnode->next = NULL;
+    return newnode;
+}
+void enqueue_front() {
+    struct node *newnode = createnode();
+    if (front == NULL) {
+        front = rear = newnode;
+        rear->next = front;
+    } else {
+        newnode->next = front;
+        front = newnode;
+        rear->next = front;
+    }
+}
+void enqueue_rear() {
+    struct node *newnode = createnode();
+    if (front == NULL) {
+        front = rear = newnode;
+        rear->next = front;
+    } else {
+        rear->next = newnode;
+        rear = newnode;
+        rear->next = front;
+    }
+}
+void dequeue_front() {
+    if (front == NULL) {
+        printf("Deque is empty!\n");
+        return;
+    }
+    struct node *temp = front;
+    if (front == rear) { 
+        front = rear = NULL;
+    } else {
+        front = front->next;
+        rear->next = front;
+    }
+    free(temp);
+    printf("Deleted from front\n");
+}
+void dequeue_rear() {
+    if (front == NULL) {
+        printf("Deque is empty!\n");
+        return;
+    }
+    struct node *temp = front, *prev = NULL;
+    if (front == rear) {
+        free(front);
+        front = rear = NULL;
+    } else {
+        while (temp->next != front) {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = front;
+        rear = prev;
+        free(temp);
+    }
+    printf("Deleted from rear\n");
+}
+void display() {
+    if (front == NULL) {
+        printf("Deque is empty!\n");
+        return;
+    }
+    struct node *temp = front;
+    printf("Deque elements: ");
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != front);
+    printf("\n");
+}
+int main() {
+    int choice;
+    do {
+        printf("\n---Deque Menu---\n");
+        printf("1. Enqueue Front\n");
+        printf("2. Enqueue Rear\n");
+        printf("3. Dequeue Front\n");
+        printf("4. Dequeue Rear\n");
+        printf("5. Display\n");
+        printf("6. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch(choice) {
+            case 1: enqueue_front(); break;
+            case 2: enqueue_rear(); break;
+            case 3: dequeue_front(); break;
+            case 4: dequeue_rear(); break;
+            case 5: display(); break;
+            case 6: exit(0);
+            default: printf("Invalid choice!\n");
+        }
+    } while (1);
+    return 0;
+}
+
+BFS
+
+#include <stdio.h>
+#define MAX 20   
+int adj[MAX][MAX];   
+int visited[MAX];    
+int queue[MAX];      
+int n;               
+int front, rear;
+void BFS(int s) {
+    front = rear = -1;
+    for (int i = 0; i < n; i++) {
+        visited[i] = 0;
+    }
+    rear++;
+    queue[rear] = s;
+    visited[s] = 1;
+    while (front < rear) {
+        front++;
+        s = queue[front];
+        printf("%d ", s);
+        for (int i = 0; i < n; i++) {
+            if (adj[s][i] == 1 && visited[i] == 0) {
+                rear++;
+                queue[rear] = i;
+                visited[i] = 1;
+            }
+        }
+    }
+}
+int main() {
+    int edges, u, v, start;
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            adj[i][j] = 0;
+        }
+    }
+    printf("Enter number of edges: ");
+    scanf("%d", &edges);
+    printf("Enter edges (u v):\n");
+    for (int i = 0; i < edges; i++) {
+        scanf("%d %d", &u, &v);
+        adj[u][v] = 1;
+        adj[v][u] = 1;
+    }
+    printf("Enter starting vertex: ");
+    scanf("%d", &start);
+    printf("Adjacency Matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", adj[i][j]);
+        }
+        printf("\n");
+    }
+    printf("BFS Traversal starting from %d: ", start);
+    BFS(start);
+    return 0;
+}
+
+DFS
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#define max 10
+int stack[max];
+int visited[max];
+int top=-1;
+int adj[max][max];
+void dfs(int s,int n)
+{
+    int v;
+    for(int i=0;i<n;i++)
+    {
+        visited[i]=0;
+    }
+    stack[++top]=s;
+    visited[s]=1;
+    while(top!=-1)
+    {
+        v=stack[top--];
+        printf("%d->",v);
+        for(int i=n-1;i>=0;i--)
+        {
+            if(adj[v][i]==1 && visited[i]==0)
+            {
+                stack[++top]=i;
+                visited[i]=1;
+            }
+        }
+    }
+    printf("NULL\n");
+}
+void main()
+{
+    int n,start;
+    printf("Enter no. of vertices:");
+    scanf("%d",&n);
+    printf("Enter adjacency matrix:\n");
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+        }
+    }
+    printf("Enter starting vertex:");
+    scanf("%d",&start);
+    printf("DFS Traversal:\n");
+    dfs(start,n);
+}
+
+GRAPH CREATION
+
+#include <stdio.h>
+int main() {
+    int n, e;                 // n = number of vertices, e = number of edges
+    int i, j, v1, v2;
+ 
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+ 
+    printf("Enter number of edges: ");
+    scanf("%d", &e);
+ 
+    // Adjacency matrix
+    int adj[20][20];          // change 20 to bigger if needed
+ 
+    // Initialize matrix with 0
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            adj[i][j] = 0;
+        }
+    }
+ 
+    printf("\nEnter edges (u v) as vertex numbers (0 to %d):\n", n - 1);
+    for (i = 0; i < e; i++) {
+        printf("Edge %d: ", i + 1);
+        scanf("%d %d", &v1, &v2);
+ 
+        // For undirected graph, mark both [v1][v2] and [v2][v1]
+        adj[v1][v2] = 1;
+        adj[v2][v1] = 1;
+ 
+        // If you want a directed graph, comment the next line:
+        // adj[v2][v1] = 0;   // (already 0, just for clarity)
+    }
+ 
+    // Display adjacency matrix
+    printf("\nAdjacency Matrix:\n   ");
+    for (i = 0; i < n; i++)
+        printf("%3d", i);
+    printf("\n");
+ 
+    for (i = 0; i < n; i++) {
+        printf("%3d", i);
+        for (j = 0; j < n; j++) {
+            printf("%3d", adj[i][j]);
+        }
+        printf("\n");
+    }
+ 
+    return 0;
+}
+Circular Queue
+ #include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *front=NULL;
+struct node *rear=NULL;
+void insert()
+{
+    struct node *temp;
+    temp=(struct node *)malloc(sizeof(struct node));
+    if(temp==NULL)
+     printf("Node not created\n");
+    else
+    {
+        printf("Enter data:");
+        scanf("%d",&temp->data);
+    }
+    if(front==NULL)
+    {
+        front=rear=temp;
+        rear->next=front;
+    }
+    else
+    {
+        temp->next=front;
+        rear->next=temp;
+        rear=temp;
+    }
+}
+void delete()
+{
+    struct node *t;
+    if(front==NULL && rear==NULL)
+    {
+        printf("Queue is empty\n");
+    }
+    else if(front==rear)
+    {
+        printf("Deleted node is %d\n",front->data);
+        free(front);
+        front=rear=NULL;
+    }
+    else
+    {
+        t=front;
+        front=front->next;
+        rear->next=front;
+        printf("Deleted node is %d\n",t->data);
+        free(t);
+    }
+}
+void display()
+{
+    struct node *t=front;
+    if(front==NULL)
+    {
+        printf("List is empty\n");
+    }
+    else
+    {
+        printf("The elements are:");
+        printf("%d ",t->data);
+        t=t->next;
+        while(t!=front)
+        {
+            printf("%d ",t->data);
+            t=t->next;
+        }
+        printf("\n");
+    }
+}
+void main()
+{
+    int choice;
+    do
+    {
+    printf("Circular queues\n");
+    printf("1.insert\n2.delete\n3.display\n4.exit\n");
+    printf("Enter your choice:");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1:insert();break;
+        case 2:delete();break;
+        case 3:display();break;
+        case 4:exit(0);break;
+        default:printf("Enter correct choice\n");
+        break;
+    }
+}while(1);
+}
+Heap Sort
+#include <stdio.h>
+#include <stdlib.h>
+ 
+
+struct node {
+    int data;
+    struct node *left, *right;
+};
+ 
+
+struct node* newNode(int data) {
+    struct node* n = (struct node*)malloc(sizeof(struct node));
+    n->data = data; n->left = n->right = NULL;
+    return n;
+}
+ 
+
+// Build tree from array (complete binary tree)
+struct node* buildTree(int arr[], int i, int n) {
+    if (i >= n) return NULL;
+    struct node* root = newNode(arr[i]);
+    root->left = buildTree(arr, 2*i+1, n);
+    root->right = buildTree(arr, 2*i+2, n);
+    return root;
+}
+ 
+
+void swap(int *a, int *b) { int t = *a; *a = *b; *b = t; }
+ 
+
+// Heapify max-heap
+void heapify(struct node* r) {
+    if (!r) return;
+    if (r->left) heapify(r->left);
+    if (r->right) heapify(r->right);
+ 
+
+    struct node* largest = r;
+    if (r->left && r->left->data > largest->data) largest = r->left;
+    if (r->right && r->right->data > largest->data) largest = r->right;
+ 
+
+    if (largest != r) {
+        swap(&r->data, &largest->data);
+        heapify(largest);
+    }
+}
+ 
+
+void inorder(struct node* r) {
+    if (!r) return;
+    inorder(r->left);
+    printf("%d ", r->data);
+    inorder(r->right);
+}
+ 
+
+int main() {
+    int n;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    int *arr = malloc(n * sizeof(int));
+    printf("Enter node values:\n");
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+ 
+
+    struct node* root = buildTree(arr, 0, n);
+ 
+
+    printf("Original tree (in-order): ");
+    inorder(root);
+    printf("\n");
+ 
+
+    heapify(root);
+ 
+
+    printf("After heapify (in-order): ");
+    inorder(root);
+    printf("\n");
+ 
+
+    free(arr);
+    return 0;
+}
